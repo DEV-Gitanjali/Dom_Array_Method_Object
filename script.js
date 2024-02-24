@@ -1,9 +1,9 @@
 const main = document.getElementById('main');
-const addUserBtn =document.getElementById('add-user');
+const addUserBtn = document.getElementById('add-user');
 const doubleBtn = document.getElementById('double');
-const showMillionairesBtn = document.getElementById('show-millionaries');
-const sortBtn =document.getElementById('sort');
-const calculateWeathBtn = document.getElementById('calculate-wealth');
+const showMillionairesBtn = document.getElementById('show-millionaires');
+const sortBtn = document.getElementById('sort');
+const calculateWealthBtn = document.getElementById('calculate-wealth');
 
 let data = [];
 
@@ -25,11 +25,30 @@ async function getRandomUser() {
 
   addData(newUser);
 }
-console.log(getRandomUser);
 
 
-// add new obj to data arr
+// Add new obj to data arr
+function addData(obj) {
+    data.push(obj);
+  
+    updateDOM();
+  }
 
-function addData(obj){
-    data.push();
-}
+
+// Update DOM
+function updateDOM(providedData = data) {
+    // Clear main div
+    main.innerHTML = '<h2><strong>Person</strong> Wealth</h2>';
+  
+    providedData.forEach(item => {
+      const element = document.createElement('div');
+      element.classList.add('person');
+      element.innerHTML = `<strong>${item.name}</strong> ${formatMoney(
+        item.money
+      )}`;
+      main.appendChild(element);
+    });
+  }
+
+
+
